@@ -13,7 +13,7 @@ function fizzbuzz(number) {
     return number;
   };
   return string;
-}
+};
 
 
 // for (let index = 1; index <= 50; index++) {
