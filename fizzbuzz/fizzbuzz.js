@@ -1,6 +1,4 @@
-module.exports = fizzbuzz;
-
-function fizzbuzz(number) {
+const fizzbuzz = (number) => {
   let string = '';
 
   if (number % 3 === 0) {
@@ -14,6 +12,9 @@ function fizzbuzz(number) {
   };
   return string;
 };
+
+module.exports = fizzbuzz;
+
 
 
 // for (let index = 1; index <= 50; index++) {
