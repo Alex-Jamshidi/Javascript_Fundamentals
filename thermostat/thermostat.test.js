@@ -12,30 +12,43 @@ describe('Thermostat', () => {
     thermostat.up();
     expect(thermostat.getTemperature()).toBe(22);
   });
+
+  it('should return a temp of 21 when down method is run', () => {
+    thermostat.down();
+    expect(thermostat.getTemperature()).toBe(21);
+  });
+
+  it('should return a temp of 25 when PSM on and attempting to increase past 25', () => {
+    thermostat.setPowerSavingMode(true)
+    expect(thermostat.getTemperature()).toBe(21);
+    for (let i = 0 ; i < 10 ; i++) {
+    thermostat.up();
+    }
+    expect(thermostat.getTemperature()).toBe(25);
+  });
+
+  it('should return a temp of 26 when up method is run with PSM off', () => {
+    thermostat.setPowerSavingMode(false);
+    thermostat.up();
+    expect(thermostat.getTemperature()).toBe(26);
+  });
+
+  it('should return a temp of 20 when reset method is run', () => {
+    thermostat.reset();
+    expect(thermostat.getTemperature()).toBe(20);
+  });
+
+  it('should return a temp limit of 30 when attempting to increase beyond that', () => {
+    for (let i = 0 ; i < 35 ; i++) {
+      thermostat.up();
+      }
+      expect(thermostat.getTemperature()).toBe(30);
+  });
+
+  it('should return a temp limit of 0 when attempting to decrease beyond that', () => {
+    for (let i = 0 ; i < 35 ; i++) {
+      thermostat.down();
+      }
+      expect(thermostat.getTemperature()).toBe(0);
+  });
 });
-
-
-
-
-// thermostat.up();
-// thermostat.up();
-// thermostat.getTemperature(); // should now return 22
-
-// thermostat.down();
-// thermostat.getTemperature(); // should now return 21
-
-// thermostat.setPowerSavingMode(true); // PSM is now on, max temperature is 25
-
-// for (let i = 0 ; i < 10 ; i++) {
-//   thermostat.up();
-// }
-
-// thermostat.getTemperature(); // should be 25 (max reached)
-
-// thermostat.setPowerSavingMode(false); // PSM is now off, max temperature is no more 25
-
-// thermostat.up();
-// thermostat.getTemperature(); // should now return 26
-
-// thermostat.reset();
-// thermostat.getTemperature(); // should be back to 20
